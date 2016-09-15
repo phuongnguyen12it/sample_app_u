@@ -8,13 +8,15 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
     	log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)#bam roi luu vao cookie
-    	redirect_to user # chuyen huong nhanh = user_url(user)
+    	redirect_back_or user# redirect_to user # chuyen huong nhanh = user_url(user)
     else
       # Create an error message.
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
     end	
   end
+
+  
 
   def destroy
   	log_out if logged_in?
